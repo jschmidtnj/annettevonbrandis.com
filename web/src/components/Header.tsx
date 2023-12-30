@@ -15,8 +15,6 @@ import { navigate } from "gatsby";
 import { getFontFamily } from "../utils";
 import Link from "./Link";
 
-const starStyle = false;
-
 interface HeaderData {
   site: {
     siteMetadata: {
@@ -60,7 +58,6 @@ const Social: React.FC<{
 const Header: React.FC<StackProps> = (props) => {
   const [isClickedOpen, setIsClickedOpen] = React.useState(false);
   const [isStar, setIsStar] = React.useState(false);
-  const isStarStyle = React.useMemo(() => isStar && starStyle, [isStar]);
   const theme = useTheme();
   const isNotSmall = useMediaQuery(theme.breakpoints.up("sm"));
   const isOpen = React.useMemo(
@@ -118,31 +115,9 @@ const Header: React.FC<StackProps> = (props) => {
           variant="h4"
           underline="none"
           whiteSpace="nowrap"
-          color={isStarStyle ? "accent.contrastText" : undefined}
         >
           {data.site.siteMetadata.title}
         </Link>
-        {isNotSmall ? null : (
-          <Button
-            variant="text"
-            sx={{ minWidth: 0, padding: 0 }}
-            onClick={() => {
-              if (starStyle) {
-                setIsStar(!isStar);
-              } else {
-                toggleOpen();
-              }
-            }}
-          >
-            <Typography
-              color={isStarStyle ? "accent.contrastText" : undefined}
-              fontWeight={isStarStyle ? "bold" : undefined}
-              variant="h5"
-            >
-              ☆
-            </Typography>
-          </Button>
-        )}
       </Stack>
       {!isOpen && !isNotSmall ? null : (
         <HeaderLinks
@@ -150,14 +125,7 @@ const Header: React.FC<StackProps> = (props) => {
           alignItems={{ xs: "center", sm: "flex-end" }}
           linkProps={{
             textAlign: "center",
-            variant: isNotSmall ? "h5" : !isStarStyle ? "h4" : "h3",
-            sx: !isStarStyle
-              ? undefined
-              : {
-                  "-webkit-text-fill-color": "black",
-                  "-webkit-text-stroke-width": "1px",
-                  "-webkit-text-stroke-color": "white",
-                },
+            variant: isNotSmall ? "h5" : "h3",
           }}
         >
           {!isOpen ? null : <Social siteMetadata={data.site.siteMetadata} />}

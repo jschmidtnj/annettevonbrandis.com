@@ -8,7 +8,7 @@ const config: GatsbyConfig = {
     title: "Annette von Brandis",
     siteUrl: "https://annettevonbrandis.com",
     linkedin: "https://www.linkedin.com/in/nyc-annika",
-    contactEmail: "hello@annika.world",
+    contactEmail: "annette@annettevonbrandis.com",
   },
   trailingSlash: 'never',
   graphqlTypegen: true,
@@ -69,14 +69,6 @@ const config: GatsbyConfig = {
         path: `${__dirname}/content/pages/`,
       },
       __key: "pages",
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "uploads",
-        path: `${__dirname}/content/uploads/`,
-      },
-      __key: "uploads",
     },
   ],
 };

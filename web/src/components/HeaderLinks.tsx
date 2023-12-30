@@ -13,34 +13,14 @@ interface PageData {
 
 const pages: PageData[] = [
   {
-    title: "film",
-    path: "/film",
-    accent: "accent.100",
-  },
-  {
-    title: "tattoo",
-    path: "/tattoo",
-    accent: "accent.200",
-  },
-  {
-    title: "fine art",
+    title: "art",
     path: "/art",
     accent: "accent.300",
   },
   {
-    title: "music",
-    path: "/music",
-    disabled: true,
-  },
-  {
-    title: "writing",
-    path: "/writing",
-    disabled: true,
-  },
-  {
-    title: "shop",
-    path: "/shop",
-    disabled: true,
+    title: "students",
+    path: "/students",
+    accent: "accent.300",
   },
   {
     title: "about",

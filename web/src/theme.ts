@@ -8,12 +8,11 @@ const theme = createTheme({
     fontFamily: getFontFamily("Libre Franklin"),
   },
   palette: {
-    mode: "dark",
     primary: {
-      main: "#ffffff",
+      main: "#000000",
     },
     secondary: {
-      main: "#19857b",
+      main: "#11111",
     },
     error: {
       main: red.A400,
