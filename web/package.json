@@ -4,6 +4,7 @@
   "private": false,
   "description": "annettevonbrandis.com",
   "author": "Joshua Schmidt",
+  "license": "MIT",
   "keywords": [
     "gatsby"
   ],

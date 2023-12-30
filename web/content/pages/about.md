@@ -45,15 +45,4 @@ awards: >-
 
 
   Silver Recognitions for Photographic Excellence, 2019
-images:
-  - showCaption: false
-    year: 2023
-    width: 0.8
-    caption: " "
-    image: ../assets/example2.jpg
-  - year: 2023
-    width: 0.8
-    image: ../assets/example1.jpg
-    caption: " "
-    showCaption: false
 ---
