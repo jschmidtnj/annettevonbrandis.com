@@ -6,12 +6,13 @@ backend:
 site_url: https://annetteportfolio.netlify.app
 
 locale: en
-media_folder: ../assets
-public_folder: ../assets
+media_folder: ''
 
 collections:
   - name: pages
     label: Pages
+    media_folder: ../assets
+    public_folder: ../assets
     files:
       - label: Home Page
         name: home
@@ -102,6 +103,8 @@ collections:
     label: Professional Work
     folder: web/content/pages/projects
     create: true
+    media_folder: ../../assets
+    public_folder: ../../assets
     fields:
       - name: title
         label: Title
@@ -144,6 +147,8 @@ collections:
     label: Student Work
     folder: web/content/pages/students
     create: true
+    media_folder: ../../assets
+    public_folder: ../../assets
     fields:
       - name: title
         label: Title
