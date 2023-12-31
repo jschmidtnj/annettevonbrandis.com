@@ -36,7 +36,9 @@ const pages: PageData[] = [
 
 const HeaderLinks: React.FC<
   StackProps & {
-    linkProps?: LinkProps;
+    linkProps?: LinkProps & {
+      component?: string;
+    };
   }
 > = ({ linkProps, ...props }) => {
   const location = useLocation();
