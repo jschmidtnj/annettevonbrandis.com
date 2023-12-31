@@ -13,7 +13,7 @@ import HeaderLinks from "./HeaderLinks";
 import { useStaticQuery, graphql } from "gatsby";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MenuIcon from "@mui/icons-material/Menu";
-import { navigate } from "gatsby";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { getFontFamily } from "../utils";
 import Link from "./Link";
 
@@ -28,13 +28,15 @@ interface HeaderData {
 
 const MenuButton: React.FC<{
   handleClick: () => void;
+  isOpen: boolean;
 }> = (props) => (
   <Button
     variant="text"
     onClick={props.handleClick}
     sx={{ minWidth: 0, padding: 0 }}
+    title={props.isOpen ? "Close" : "Open"}
   >
-    <MenuIcon />
+    {props.isOpen ? <MenuOpenIcon /> : <MenuIcon />}
   </Button>
 );
 
@@ -107,7 +109,7 @@ const Header: React.FC<StackProps> = (props) => {
           {data.site.siteMetadata.title}
         </Link>
         {isNotSmall ? null : (
-          <MenuButton handleClick={toggleOpen} />
+          <MenuButton handleClick={toggleOpen} isOpen={isOpen} />
         )}
       </Stack>
       {!isOpen && !isNotSmall ? null : (
