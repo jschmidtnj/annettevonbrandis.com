@@ -118,7 +118,6 @@ const Header: React.FC<BoxProps> = (props) => {
               linkProps={{
                 textAlign: "center",
                 variant: isNotSmall ? "h5" : "h3",
-                component: "div"
               }}
             >
               {!isOpen ? null : <Social siteMetadata={data.site.siteMetadata} />}
