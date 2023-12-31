@@ -103,8 +103,8 @@ collections:
     label: Professional Work
     folder: web/content/pages/projects
     create: true
-    media_folder: ../../assets
-    public_folder: ../../assets
+    media_folder: ../assets
+    public_folder: ../assets
     fields:
       - name: title
         label: Title
@@ -147,8 +147,8 @@ collections:
     label: Student Work
     folder: web/content/pages/students
     create: true
-    media_folder: ../../assets
-    public_folder: ../../assets
+    media_folder: ../assets
+    public_folder: ../assets
     fields:
       - name: title
         label: Title
