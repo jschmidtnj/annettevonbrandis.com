@@ -2,11 +2,11 @@ import * as React from "react";
 import {
   Button,
   Stack,
-  StackProps,
-  Typography,
+  BoxProps,
   useMediaQuery,
   Box,
   useTheme,
+  Container,
   Link as ExternalLink,
 } from "@mui/material";
 import HeaderLinks from "./HeaderLinks";
@@ -52,7 +52,7 @@ const Social: React.FC<{
   </Stack>
 );
 
-const Header: React.FC<StackProps> = (props) => {
+const Header: React.FC<BoxProps> = (props) => {
   const [isClickedOpen, setIsClickedOpen] = React.useState(false);
   const theme = useTheme();
   const isNotSmall = useMediaQuery(theme.breakpoints.up("sm"));
@@ -75,56 +75,57 @@ const Header: React.FC<StackProps> = (props) => {
     }
   `);
   return (
-    <Stack
-      mt={4}
-      direction={{ md: "row" }}
-      justifyContent="space-between"
-      width="100%"
-      {...props}
-    >
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={2}
-        width={{
-          xs: "100%",
-          sm: undefined,
-        }}
-        justifyContent={{
-          xs: "space-between",
-          sm: "center",
-          md: "flex-start",
-        }}
-      >
-        {!isNotSmall ? <Box /> : <Social siteMetadata={data.site.siteMetadata} />}
-        <Link
-          to="/"
-          fontWeight="bold"
-          textTransform="uppercase"
-          fontFamily={getFontFamily("Secular One")}
-          variant="h4"
-          underline="none"
-          whiteSpace="nowrap"
+    <Box py={2} bgcolor="white" width="100%" position="sticky" top="0" boxShadow={2} zIndex={10} {...props}>
+      <Container maxWidth="lg">
+        <Stack
+          direction={{ md: "row" }}
+          justifyContent="space-between"
         >
-          {data.site.siteMetadata.title}
-        </Link>
-        {isNotSmall ? null : (
-          <MenuButton handleClick={toggleOpen} isOpen={isOpen} />
-        )}
-      </Stack>
-      {!isOpen && !isNotSmall ? null : (
-        <HeaderLinks
-          direction={{ xs: "column", sm: "row" }}
-          alignItems={{ xs: "center", sm: "flex-end" }}
-          linkProps={{
-            textAlign: "center",
-            variant: isNotSmall ? "h5" : "h3",
-          }}
-        >
-          {!isOpen ? null : <Social siteMetadata={data.site.siteMetadata} />}
-        </HeaderLinks>
-      )}
-    </Stack>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            width={{
+              xs: "100%",
+              sm: undefined,
+            }}
+            justifyContent={{
+              xs: "space-between",
+              sm: "center",
+              md: "flex-start",
+            }}
+          >
+            {!isNotSmall ? <Box /> : <Social siteMetadata={data.site.siteMetadata} />}
+            <Link
+              to="/"
+              fontWeight="bold"
+              textTransform="uppercase"
+              fontFamily={getFontFamily("Secular One")}
+              variant="h4"
+              underline="none"
+              whiteSpace="nowrap"
+            >
+              {data.site.siteMetadata.title}
+            </Link>
+            {isNotSmall ? null : (
+              <MenuButton handleClick={toggleOpen} isOpen={isOpen} />
+            )}
+          </Stack>
+          {!isOpen && !isNotSmall ? null : (
+            <HeaderLinks
+              direction={{ xs: "column", sm: "row" }}
+              alignItems={{ xs: "center", sm: "flex-end" }}
+              linkProps={{
+                textAlign: "center",
+                variant: isNotSmall ? "h5" : "h3",
+              }}
+            >
+              {!isOpen ? null : <Social siteMetadata={data.site.siteMetadata} />}
+            </HeaderLinks>
+          )}
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 
