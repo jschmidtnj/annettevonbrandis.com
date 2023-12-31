@@ -4,39 +4,54 @@ import {
   getImage,
   ImageDataLike,
 } from "gatsby-plugin-image";
+import { Typography } from "@mui/material";
 import Layout from "../components/Layout";
-import ImageGrid, { ImageMetadata } from "../components/ImageGrid";
+import Markdown from "../components/Markdown";
+import ImageGrid from "../components/ImageGrid";
+import { getPageId } from "../utils";
 
 interface ProjectsData {
-  markdownRemark: {
+  page: {
     frontmatter: {
-      images: ({
-        image: ImageDataLike;
-      } & ImageMetadata)[];
+      description: string;
     };
+  };
+  projects: {
+    nodes: {
+      frontmatter: {
+        title: string;
+        caption: string;
+        year: number;
+        image: ImageDataLike;
+      };
+    }[];
   };
 }
 
 const ProjectsPage: React.FC<PageProps<ProjectsData>> = (props) => {
   const images = React.useMemo(
     () =>
-      props.data.markdownRemark.frontmatter.images.map((img) =>
-        getImage(img.image)!
+      props.data.projects.nodes.map((node) =>
+        getImage(node.frontmatter.image)!
       ),
-    [props.data.markdownRemark.frontmatter.images]
+    [props.data.projects.nodes]
   );
   const metadata = React.useMemo(
     () =>
-      props.data.markdownRemark.frontmatter.images.map((img) => ({
-        caption: img.caption,
-        showCaption: img.showCaption,
-        width: img.width,
-        year: img.year,
+      props.data.projects.nodes.map((node) => ({
+        name: node.frontmatter.title,
+        caption: node.frontmatter.caption,
+        path: `/projects/${getPageId(node.frontmatter.title)}`,
+        width: 4,
+        year: node.frontmatter.year,
       })),
-    [props.data.markdownRemark.frontmatter.images]
+    [props.data.projects.nodes]
   );
   return (
     <Layout>
+      <Typography fontWeight="bold" textAlign="center">
+        <Markdown>{props.data.page.frontmatter.description}</Markdown>
+      </Typography>
       <ImageGrid images={images} metadata={metadata} />
     </Layout>
   );
@@ -46,22 +61,26 @@ export default ProjectsPage;
 
 export const pageQuery = graphql`
   query {
-    markdownRemark(fileAbsolutePath: { regex: "/.*/content/pages/art.md$/" }) {
+    page: markdownRemark(fileAbsolutePath: { regex: "/.*/content/pages/projects.md$/" }) {
       frontmatter {
-        images {
+        description
+      }
+    }
+    projects: allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/.*/content/pages/projects/.*\\.md$/" } }) {
+      nodes {
+        frontmatter {
+          title
+          year
+          caption
           image {
             childImageSharp {
               gatsbyImageData(
-                placeholder: BLURRED
+                placeholder: NONE
                 formats: [AUTO, WEBP, AVIF]
                 layout: FULL_WIDTH
               )
             }
           }
-          caption
-          showCaption
-          width
-          year
         }
       }
     }

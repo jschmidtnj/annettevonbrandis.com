@@ -1,10 +1,10 @@
 ---
-title: Project 1
+title: Class 1
 year: 2023
 image: ../../assets/example1.jpg
-caption: Cool project
-description: Short description about the project.
-story: Longer description about the project.
+caption: class about typography
+description: Short description about the class.
+story: Longer description / story about the class.
 images:
   - width: 3
     name: image 1

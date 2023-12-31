@@ -7,7 +7,7 @@ import { Box, Typography } from "@mui/material";
 import Markdown from "../components/Markdown";
 import ImageGrid, { ImageMetadata } from "../components/ImageGrid";
 
-interface ProjectData {
+interface StudentData {
   markdownRemark: {
     frontmatter: {
       image: ImageDataLike;
@@ -34,7 +34,7 @@ const TextCard: React.FC<{
   </Box>
 );
 
-const ProjectPage: React.FC<PageProps<ProjectData>> = (props) => {
+const StudentPage: React.FC<PageProps<StudentData>> = (props) => {
   const heroImage = getImage(props.data.markdownRemark.frontmatter.image);
   const images = React.useMemo(
     () =>
@@ -68,10 +68,10 @@ const ProjectPage: React.FC<PageProps<ProjectData>> = (props) => {
   );
 };
 
-export default ProjectPage;
+export default StudentPage;
 
 export const pageQuery = graphql`
-  query GetProject($pagePath: String!) {
+  query GetStudent($pagePath: String!) {
     markdownRemark(fileAbsolutePath: { regex: $pagePath }) {
       frontmatter {
         image {

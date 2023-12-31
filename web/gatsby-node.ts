@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import type { GatsbyNode } from "gatsby";
+import { getPageId } from './src/utils';
 
 interface ProjectData {
   allMarkdownRemark: {
@@ -11,10 +12,20 @@ interface ProjectData {
   };
 }
 
+interface StudentData {
+  allMarkdownRemark: {
+    nodes: {
+      frontmatter: {
+        title: string;
+      };
+    }[];
+  };
+}
+
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
-  const project = resolve(`./src/templates/project.tsx`);
-  const result = await graphql<ProjectData>(`
+
+  const projectData = await graphql<ProjectData>(`
     {
       allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/.*/content/pages/projects/.*\.md$/" } }) {
         nodes {
@@ -25,16 +36,17 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
       }
     }
   `);
-  if (result.errors) {
+  if (projectData.errors) {
     reporter.panicOnBuild(
       `Error loading projects`,
-      result.errors
+      projectData.errors
     )
     return;
   }
 
-  result.data!.allMarkdownRemark.nodes.map(node => {
-    const pageId = node.frontmatter.title.replace(/\s+/g, '-').toLowerCase();
+  const project = resolve(`./src/templates/project.tsx`);
+  projectData.data!.allMarkdownRemark.nodes.map(node => {
+    const pageId = getPageId(node.frontmatter.title);
     const slug = `/projects/${pageId}`
     const pagePath = `/.*/content/pages/projects/${pageId}\\.md$/`;
     createPage({
@@ -44,5 +56,38 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
         pagePath
       }
     })
-  })
+  });
+
+  const studentData = await graphql<StudentData>(`
+    {
+      allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/.*/content/pages/students/.*\.md$/" } }) {
+        nodes {
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+  `);
+  if (studentData.errors) {
+    reporter.panicOnBuild(
+      `Error loading students`,
+      studentData.errors
+    )
+    return;
+  }
+
+  const student = resolve(`./src/templates/student.tsx`);
+  studentData.data!.allMarkdownRemark.nodes.map(node => {
+    const pageId = getPageId(node.frontmatter.title);
+    const slug = `/students/${pageId}`
+    const pagePath = `/.*/content/pages/students/${pageId}\\.md$/`;
+    createPage({
+      path: slug,
+      component: student,
+      context: {
+        pagePath
+      }
+    })
+  });
 };

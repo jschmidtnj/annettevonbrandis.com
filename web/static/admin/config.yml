@@ -10,85 +10,31 @@ media_folder: ../assets
 public_folder: ../assets
 
 collections:
-  - name: projects
-    label: Projects
-    folder: web/content/pages/projects
-    create: true
-    fields:
-      - name: image
-        label: Image
-        widget: image
-      - name: title
-        label: Title
-        widget: string
-      - name: caption
-        label: Caption
-        widget: string
-      - name: description
-        label: Description
-        widget: markdown
-      - name: story
-        label: Story
-        widget: markdown
-      - name: images
-        label: Images
-        widget: list
-        fields:
-          - name: name
-            label: Name
-            widget: string
-          - name: image
-            label: Image
-            widget: image
-          - name: year
-            label: Year
-            widget: number
-            value_type: int
-            default: 2023
-          - name: width
-            label: Width
-            widget: number
-            value_type: float
-            min: 1
-            max: 12
-            default: 6
   - name: pages
     label: Pages
     files:
-      - label: Students Page
+      - label: Home Page
+        name: home
+        file: web/content/pages/home.md
+        fields:
+          - name: intro
+            label: Intro
+            widget: markdown
+      - label: Professional Work Page
+        name: projects
+        file: web/content/pages/projects.md
+        fields:
+          - name: description
+            label: Description
+            widget: markdown
+      - label: Student Work Page
         name: students
         file: web/content/pages/students.md
         fields:
           - name: description
             label: Description
             widget: markdown
-          - name: images
-            label: Images
-            widget: list
-            fields:
-              - name: caption
-                label: Caption
-                widget: string
-              - name: showCaption
-                label: Show Caption
-                widget: boolean
-                default: true
-              - name: image
-                label: Image
-                widget: image
-              - name: year
-                label: Year
-                widget: number
-                value_type: int
-                default: 2023
-              - name: width
-                label: Width
-                widget: number
-                value_type: float
-                min: 1
-                max: 12
-                default: 3
-      - label: Art Page
+      - label: Community Page
         name: art
         file: web/content/pages/art.md
         fields:
@@ -96,13 +42,9 @@ collections:
             label: Images
             widget: list
             fields:
-              - name: caption
-                label: Caption
+              - name: name
+                label: Name
                 widget: string
-              - name: showCaption
-                label: Show Caption
-                widget: boolean
-                default: true
               - name: image
                 label: Image
                 widget: image
@@ -134,3 +76,109 @@ collections:
           - name: awards
             label: Awards
             widget: markdown
+          - name: images
+            label: Images
+            widget: list
+            fields:
+              - name: name
+                label: Name
+                widget: string
+              - name: image
+                label: Image
+                widget: image
+              - name: year
+                label: Year
+                widget: number
+                value_type: int
+                default: 2023
+              - name: width
+                label: Width
+                widget: number
+                value_type: float
+                min: 1
+                max: 12
+                default: 3
+  - name: projects
+    label: Professional Work
+    folder: web/content/pages/projects
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: year
+        label: Year
+        widget: number
+        value_type: int
+        default: 2023
+      - name: image
+        label: Image
+        widget: image
+      - name: caption
+        label: Caption
+        widget: string
+      - name: description
+        label: Description
+        widget: markdown
+      - name: story
+        label: Story
+        widget: markdown
+      - name: images
+        label: Images
+        widget: list
+        fields:
+          - name: name
+            label: Name
+            widget: string
+          - name: image
+            label: Image
+            widget: image
+          - name: width
+            label: Width
+            widget: number
+            value_type: float
+            min: 1
+            max: 12
+            default: 6
+  - name: students
+    label: Student Work
+    folder: web/content/pages/students
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: year
+        label: Year
+        widget: number
+        value_type: int
+        default: 2023
+      - name: image
+        label: Image
+        widget: image
+      - name: caption
+        label: Caption
+        widget: string
+      - name: description
+        label: Description
+        widget: markdown
+      - name: story
+        label: Story
+        widget: markdown
+      - name: images
+        label: Images
+        widget: list
+        fields:
+          - name: name
+            label: Name
+            widget: string
+          - name: image
+            label: Image
+            widget: image
+          - name: width
+            label: Width
+            widget: number
+            value_type: float
+            min: 1
+            max: 12
+            default: 6

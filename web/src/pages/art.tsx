@@ -28,8 +28,7 @@ const ArtPage: React.FC<PageProps<ArtData>> = (props) => {
   const metadata = React.useMemo(
     () =>
       props.data.markdownRemark.frontmatter.images.map((img) => ({
-        caption: img.caption,
-        showCaption: img.showCaption,
+        name: img.name,
         width: img.width,
         year: img.year,
       })),
@@ -58,8 +57,7 @@ export const pageQuery = graphql`
               )
             }
           }
-          caption
-          showCaption
+          name
           width
           year
         }

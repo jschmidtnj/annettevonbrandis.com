@@ -3,11 +3,18 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { graphql, PageProps } from "gatsby";
 import Layout from "../components/Layout";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import { Box, Typography } from "@mui/material";
+import { Box, Link, Stack, Typography } from "@mui/material";
 import Markdown from "../components/Markdown";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import ImageGrid, { ImageMetadata } from "../components/ImageGrid";
 
 interface AboutData {
+  site: {
+    siteMetadata: {
+      contactEmail: string;
+      linkedin: string;
+    };
+  };
   markdownRemark: {
     frontmatter: {
       image: ImageDataLike;
@@ -45,8 +52,7 @@ const AboutPage: React.FC<PageProps<AboutData>> = (props) => {
   const metadata = React.useMemo(
     () =>
       props.data.markdownRemark.frontmatter.images.map((img) => ({
-        caption: img.caption,
-        showCaption: img.showCaption,
+        name: img.name,
         width: img.width,
         year: img.year,
       })),
@@ -75,6 +81,45 @@ const AboutPage: React.FC<PageProps<AboutData>> = (props) => {
           />
         </Grid>
       </Grid>
+      <Stack textAlign="center" mt={20} spacing={20} justifyContent="center">
+        <Typography fontWeight="bold" textTransform="uppercase">
+          Contact
+        </Typography>
+        <Box>
+          <Typography
+            variant="h5"
+            component="h2"
+            textTransform="capitalize"
+            fontWeight="bold"
+            mb={3}
+          >
+            Email
+          </Typography>
+          <Link
+            href={`mailto:${props.data.site.siteMetadata.contactEmail}`}
+            underline="none"
+            target="_blank"
+          >
+            {props.data.site.siteMetadata.contactEmail}
+          </Link>
+        </Box>
+        <Box>
+          <Typography
+            variant="h5"
+            component="h2"
+            textTransform="capitalize"
+            fontWeight="bold"
+            mb={2}
+          >
+            Social
+          </Typography>
+          <Stack direction="row" spacing={1} justifyContent="center">
+            <Link target="_blank" href={props.data.site.siteMetadata.linkedin}>
+              <LinkedInIcon />
+            </Link>
+          </Stack>
+        </Box>
+      </Stack>
       <ImageGrid images={images} metadata={metadata} />
     </Layout>
   );
@@ -84,6 +129,12 @@ export default AboutPage;
 
 export const pageQuery = graphql`
   query {
+    site {
+      siteMetadata {
+        contactEmail
+        linkedin
+      }
+    }
     markdownRemark(
       fileAbsolutePath: { regex: "/.*/content/pages/about.md$/" }
     ) {
@@ -110,8 +161,7 @@ export const pageQuery = graphql`
               )
             }
           }
-          caption
-          showCaption
+          name
           width
           year
         }

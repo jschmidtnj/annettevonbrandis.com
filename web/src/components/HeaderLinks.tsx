@@ -13,8 +13,8 @@ interface PageData {
 
 const pages: PageData[] = [
   {
-    title: "art",
-    path: "/art",
+    title: "professional",
+    path: "/projects",
     accent: "accent.300",
   },
   {
@@ -23,14 +23,14 @@ const pages: PageData[] = [
     accent: "accent.300",
   },
   {
+    title: "community",
+    path: "/art",
+    accent: "accent.300",
+  },
+  {
     title: "about",
     path: "/about",
     accent: "accent.400",
-  },
-  {
-    title: "contact",
-    path: "/contact",
-    accent: "accent.500",
   },
 ];
 
