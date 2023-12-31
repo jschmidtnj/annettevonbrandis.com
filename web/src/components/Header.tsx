@@ -75,7 +75,9 @@ const Header: React.FC<BoxProps> = (props) => {
     }
   `);
   return (
-    <Box py={2} bgcolor="white" width="100%" position="sticky" top="0" boxShadow={2} zIndex={10} {...props}>
+    <Box py={2} bgcolor="white" width="100%" position="sticky" top="0"
+      boxShadow="0 3px 4px 3px rgba(14,26,223,.2)"
+      zIndex={10} {...props}>
       <Container maxWidth="lg">
         <Stack
           direction={{ md: "row" }}
