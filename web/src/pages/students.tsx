@@ -49,9 +49,10 @@ const StudentsPage: React.FC<PageProps<StudentsData>> = (props) => {
   );
   return (
     <Layout>
-      <Typography fontWeight="bold" textAlign="center">
-        <Markdown>{props.data.page.frontmatter.description}</Markdown>
+      <Typography fontWeight="bold" variant="h1" textAlign="center">
+        Student Work
       </Typography>
+      <Markdown variant="h3" textAlign="center">{props.data.page.frontmatter.description}</Markdown>
       <ImageGrid images={images} metadata={metadata} />
     </Layout>
   );

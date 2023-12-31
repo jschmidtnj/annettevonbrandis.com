@@ -5,12 +5,14 @@ import {
   StackProps,
   Typography,
   useMediaQuery,
+  Box,
   useTheme,
   Link as ExternalLink,
 } from "@mui/material";
 import HeaderLinks from "./HeaderLinks";
 import { useStaticQuery, graphql } from "gatsby";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MenuIcon from "@mui/icons-material/Menu";
 import { navigate } from "gatsby";
 import { getFontFamily } from "../utils";
 import Link from "./Link";
@@ -24,22 +26,15 @@ interface HeaderData {
   };
 }
 
-const HeartButton: React.FC<{
+const MenuButton: React.FC<{
   handleClick: () => void;
-  isStar: boolean;
 }> = (props) => (
   <Button
     variant="text"
     onClick={props.handleClick}
     sx={{ minWidth: 0, padding: 0 }}
   >
-    <Typography
-      color={props.isStar ? "accent.contrastText" : undefined}
-      variant="h5"
-      fontWeight={props.isStar ? "bold" : undefined}
-    >
-      ♡
-    </Typography>
+    <MenuIcon />
   </Button>
 );
 
@@ -57,7 +52,6 @@ const Social: React.FC<{
 
 const Header: React.FC<StackProps> = (props) => {
   const [isClickedOpen, setIsClickedOpen] = React.useState(false);
-  const [isStar, setIsStar] = React.useState(false);
   const theme = useTheme();
   const isNotSmall = useMediaQuery(theme.breakpoints.up("sm"));
   const isOpen = React.useMemo(
@@ -100,13 +94,7 @@ const Header: React.FC<StackProps> = (props) => {
           md: "flex-start",
         }}
       >
-        {!isNotSmall ? (
-          <HeartButton handleClick={toggleOpen} isStar={isStar} />
-        ) : (
-          <Social siteMetadata={data.site.siteMetadata}>
-            <HeartButton handleClick={() => navigate("/")} isStar={isStar} />
-          </Social>
-        )}
+        {!isNotSmall ? <Box /> : <Social siteMetadata={data.site.siteMetadata} />}
         <Link
           to="/"
           fontWeight="bold"
@@ -118,6 +106,9 @@ const Header: React.FC<StackProps> = (props) => {
         >
           {data.site.siteMetadata.title}
         </Link>
+        {isNotSmall ? null : (
+          <MenuButton handleClick={toggleOpen} />
+        )}
       </Stack>
       {!isOpen && !isNotSmall ? null : (
         <HeaderLinks

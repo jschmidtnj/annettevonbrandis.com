@@ -5,6 +5,7 @@ import { Typography, TypographyProps } from "@mui/material";
 const Markdown: React.FC<
   TypographyProps & {
     children: string;
+    component?: string;
   }
 > = ({ children: content, ...props }) => {
   const converter = React.useMemo(() => new showdown.Converter(), []);

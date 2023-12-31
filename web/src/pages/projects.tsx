@@ -49,9 +49,10 @@ const ProjectsPage: React.FC<PageProps<ProjectsData>> = (props) => {
   );
   return (
     <Layout>
-      <Typography fontWeight="bold" textAlign="center">
-        <Markdown>{props.data.page.frontmatter.description}</Markdown>
+      <Typography fontWeight="bold" variant="h1" textAlign="center">
+        Professional Work
       </Typography>
+      <Markdown variant="h3" textAlign="center">{props.data.page.frontmatter.description}</Markdown>
       <ImageGrid images={images} metadata={metadata} />
     </Layout>
   );
