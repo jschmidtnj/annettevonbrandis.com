@@ -4,8 +4,9 @@ import {
   IGatsbyImageData,
 } from "gatsby-plugin-image";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { getFontFamily } from "../utils";
+import Link from "./Link";
 
 export interface ImageMetadata {
   name: string;
@@ -94,7 +95,7 @@ const Image: React.FC<{
       onMouseLeave={() => setActive(false)}
     >
       {props.metadata.path ? (
-        <Link href={props.metadata.path} underline="none">
+        <Link to={props.metadata.path} underline="none">
           <BaseImage active={active} {...props} />
         </Link>
       ) : <BaseImage active={active} {...props} />
